@@ -1,3 +1,5 @@
+$form = document.querySelector("#calcular-edades");
+
 document.querySelector('#ingresar').onclick = function(event) {
     const $cantidadIntegrantes = Math.floor(Number(document.querySelector("#cantidad-integrantes").value));
 
@@ -9,16 +11,13 @@ document.querySelector('#ingresar').onclick = function(event) {
 };
 
 document.querySelector("#calcular").onclick = function(event) {
-    const $form = document.querySelector('#calcular-edades');
 
     const edades = edadIntegrantes();
-    const errorEdades = [];
+    const errorEdades = {};
 
-    event.preventDefault();
-
-    edades.forEach(function(edad){
-       errorEdades.push(validarEdadIntegrantes(edad));
-    });
+    for(let i=0; i<edades.length; i++){
+        errorEdades[`Campo_${i+1}`]=validarEdadIntegrantes(edades[i]);
+      }
 
     borrarEdades();
 
@@ -31,6 +30,7 @@ document.querySelector("#calcular").onclick = function(event) {
         mostrarDatos();
     }
 
+    event.preventDefault();
 }
 
 document.querySelector("#resetear").onclick = () => {
@@ -43,24 +43,26 @@ document.querySelector("#resetear").onclick = () => {
 
 function manejarErrores(errorEdades){
 
+    const keys = Object.keys(errorEdades);
     const $errores = document.querySelector('#errores');
     let cantidadErrores = 0;
 
-    errorEdades.forEach((errorEdad) => {
-        const error = errorEdad;
+    keys.forEach((errorEdad) => {
+        const error = errorEdades[errorEdad];
 
         if(error){
             cantidadErrores++;
-            document.querySelector('.integrante input').className = 'error';
+            $form[errorEdad].className = "error";
 
             const $error = document.createElement('li');
             $error.innerText = error;
             $errores.appendChild($error);
 
         } else {
-            document.querySelector('.integrante input').className = '';
+            $form[errorEdad].className = "";
         }
     });
+
     return cantidadErrores;
 }
 
@@ -92,6 +94,7 @@ function crearInputs(indice) {
     $label.textContent = 'Edad del integrante: ' + (indice + 1);
     const $input = document.createElement('input');
     $input.type = 'number';
+    $input.name = `Campo_${indice + 1}`;
     const $br = document.createElement('br');
 
     $div.appendChild($label);
@@ -139,8 +142,4 @@ function ocultarBotonCalculo(){
 
 function ocultarDatos(){
     document.querySelector("#datos").className = 'oculto';
-};
-
-function mostrarDatos(){
-    document.querySelector("#datos").className = '';
 };
