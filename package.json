@@ -1,0 +1,24 @@
+{
+  "name": "proyecto-r-argentinaprograma",
+  "version": "1.0.0",
+  "description": "Tareas de la clase de r/argentina-programa",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fedeesti/Proyecto-r-argentinaprograma.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fedeesti/Proyecto-r-argentinaprograma/issues"
+  },
+  "homepage": "https://github.com/fedeesti/Proyecto-r-argentinaprograma#readme"
+}
